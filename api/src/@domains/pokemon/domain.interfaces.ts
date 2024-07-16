@@ -1,9 +1,9 @@
-interface ICries {
+export interface ICries {
     latest: string
     legacy: string
 }
 
-interface ISprites {
+export interface ISprites {
     back_default: string
     back_female: string
     back_shiny: string
@@ -14,12 +14,12 @@ interface ISprites {
     front_shiny_female: string
 }
 
-interface IMove {
+export interface IMove {
     name: string
     url: string
 }
 
-interface IAbility {
+export interface IAbility {
     name: string
     url: string
 }
