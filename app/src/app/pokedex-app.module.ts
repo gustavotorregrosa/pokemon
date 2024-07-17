@@ -5,6 +5,7 @@ import { RouterModule } from "@angular/router";
 import { routes } from './pokedex-app.routes';
 import { PokedexAppComponent } from "./pokedex-app.component";
 import { PokemonService } from "./pokemon/pokemon.service";
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { PokemonService } from "./pokemon/pokemon.service";
   ],
   providers: [
     PokemonService,
+    provideAnimationsAsync(),
   ],
   declarations: [
     PokedexAppComponent,
