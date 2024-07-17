@@ -11,6 +11,10 @@ export class PokemonRepository implements IPokemonRepository {
         }
 
         if(offset){
+            if(limit){
+                url += '&'
+            }
+            
             url += `offset=${offset}`
         }
 
