@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>{{data.name}}</h2>
+<mat-dialog-content>
+  <p>Weight: <span class="font-semibold">{{data.weight}}</span> </p>
+  <p>Height: <span class="font-semibold">{{data.height}}</span> </p>
+  <p>Abilities: <span class="font-semibold">{{data.ability}}</span> </p>
+  <img src="{{data.sprites.front_default}}" />
+  
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button (click)="onOkClick()" mat-button cdkFocusInitial>Ok</button>
+</mat-dialog-actions>
+
