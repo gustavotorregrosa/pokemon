@@ -1,4 +1,4 @@
-import { IPokemon } from "src/@domains/pokemon/domain.interfaces";
+import { IPokemon, IPokemonItem } from "src/@domains/pokemon/domain.interfaces";
 import { IPokemonRepository, IResult } from "src/@domains/pokemon/repository.interface";
 
 export class PokemonRepository implements IPokemonRepository {
@@ -19,7 +19,19 @@ export class PokemonRepository implements IPokemonRepository {
         }
 
         const response = await fetch(url)
-        return await response.json() as IResult
+
+        const result = await response.json() as IResult
+        result.next = result.next ? result.next.split('?')[1] : null
+        result.previous = result.previous ? result.previous.split('?')[1] : null
+
+        result.results = result.results.map(pokemon => {
+            const _pokemon: IPokemonItem = {...pokemon}
+            _pokemon.id = _pokemon.url.split('/')[_pokemon.url.split('/').length -2]
+            _pokemon.url = ''
+            return _pokemon
+        })
+
+        return result
 
     }
 
