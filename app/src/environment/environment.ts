@@ -1,5 +1,7 @@
 export const environment = {
-    production: false,
-    apiKey: 'http://localhost:3000/api/pokemon'
+    production: true,
+    // apiKey: 'http://localhost:3000/api/pokemon',
+    apiKey: 'https://pokemon-api.gustavo.torregrosa.dev/api/pokemon'
+
   };
   
