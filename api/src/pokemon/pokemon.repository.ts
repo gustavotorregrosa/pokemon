@@ -5,16 +5,14 @@ export class PokemonRepository implements IPokemonRepository {
 
     public loadMany = async ({limit, offset}): Promise<IResult> => {
 
-        let url = 'https://pokeapi.co/api/v2/pokemon?' 
-        if(limit){
-            url += `limit=${limit}`
-        }
+        const testing = process.env.API_URL
+        console.log({testing})
 
+        let url = process.env.API_URL + '/pokemon?' 
+        if(limit) url += `limit=${limit}`
+        
         if(offset){
-            if(limit){
-                url += '&'
-            }
-            
+            if(limit) url += '&'
             url += `offset=${offset}`
         }
 
@@ -36,7 +34,7 @@ export class PokemonRepository implements IPokemonRepository {
     }
 
     public findOneById = async (id) : Promise<IPokemon> => {
-        let url = 'https://pokeapi.co/api/v2/pokemon/'+id 
+        let url =  process.env.API_URL + '/pokemon/'+id 
         const response = await fetch(url)
         return await response.json() as IPokemon
 
