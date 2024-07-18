@@ -25,12 +25,15 @@ export class PokemonTableComponent implements AfterViewInit, OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
+  count: number = 0
+
   async ngAfterViewInit() {
     this.paginator && (this.dataSource.paginator = this.paginator);
     await this.pokemonService.loadPokemons(0, 0)
     this.dataSource.data = this.pokemonService.results
     setTimeout(() => {
-      this.paginator!.length = this.pokemonService.count
+      this.count = this.pokemonService.count
+      this.paginator && (this.paginator.length = this.count)
     }, 500)
   }
 
@@ -40,11 +43,7 @@ export class PokemonTableComponent implements AfterViewInit, OnInit {
 
 
   async openViewPokemonModal(id: string): Promise<void> {
-
     const pokemon: IPokemon = await this.pokemonService.getInfoForPokemon(id)
-
-    console.log({pokemon})
-
     const dialogRef = this.dialog.open(PokemonViewModalComponent, {
       data: { ...pokemon }
     });
@@ -59,7 +58,10 @@ export class PokemonTableComponent implements AfterViewInit, OnInit {
     if((currentOffset + e.pageSize) >=  Number(this.pokemonService.results[this.pokemonService.results.length -1].id)){
       await this.pokemonService.loadPokemons(currentOffset, e.pageSize)
       this.dataSource.data = this.pokemonService.results
-      this.paginator!.length = this.pokemonService.count
+      setTimeout(() => {
+        this.dataSource.paginator!.length = this.pokemonService.count
+      }, 1)
+      
     }
     
   }
