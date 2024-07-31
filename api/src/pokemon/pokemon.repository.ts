@@ -5,9 +5,6 @@ export class PokemonRepository implements IPokemonRepository {
 
     public loadMany = async ({limit, offset}): Promise<IResult> => {
 
-        const testing = process.env.API_URL
-        console.log({testing})
-
         let url = process.env.API_URL + '/pokemon?' 
         if(limit) url += `limit=${limit}`
         
@@ -17,7 +14,6 @@ export class PokemonRepository implements IPokemonRepository {
         }
 
         const response = await fetch(url)
-
         const result = await response.json() as IResult
         result.next = result.next ? result.next.split('?')[1] : null
         result.previous = result.previous ? result.previous.split('?')[1] : null

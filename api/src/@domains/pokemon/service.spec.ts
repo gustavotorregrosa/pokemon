@@ -1,4 +1,3 @@
-import { beforeEach } from "node:test"
 import { IPokemonRepository } from "./repository.interface"
 import { PokemonService } from "./service"
 
